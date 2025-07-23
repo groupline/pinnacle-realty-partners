@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Pinnacle Realty Partners</title>
+    <meta name="description" content="Thank you for your submission. We'll contact you within 24 hours with your cash offer.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css?v=2025-07-22-debug">
+    
+    <style>
+        .thank-you-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--blue-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+        }
+        
+        .thank-you-container {
+            background: var(--white);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-4xl);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thank-you-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-orange) 0%, var(--orange-light) 100%);
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-xl);
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: bold;
+            animation: successPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .thank-you-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--gray-900);
+            margin-bottom: var(--space-md);
+            font-weight: 600;
+        }
+        
+        .thank-you-message {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .next-steps {
+            background: var(--gray-50);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin: var(--space-2xl) 0;
+            text-align: left;
+        }
+        
+        .next-steps h3 {
+            color: var(--gray-900);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            text-align: center;
+        }
+        
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-orange);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .step-description {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+        
+        .contact-section {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin: var(--space-2xl) 0;
+        }
+        
+        .contact-section h4 {
+            margin-bottom: var(--space-md);
+            font-size: 1.1rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-lg);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-md);
+            transition: var(--transition-fast);
+        }
+        
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .home-button {
+            background: var(--primary-orange);
+            color: var(--white);
+            text-decoration: none;
+            padding: var(--space-lg) var(--space-2xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            display: inline-block;
+            margin-top: var(--space-lg);
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .home-button:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .security-note {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .security-note a {
+            color: var(--primary-orange);
+            text-decoration: none;
+        }
+        
+        .security-note a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .thank-you-container {
+                padding: var(--space-2xl);
+                margin: var(--space-lg);
+            }
+            
+            .thank-you-title {
+                font-size: 2rem;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-page">
+        <div class="thank-you-container">
+            <div class="success-icon">✓</div>
+            
+            <h1 class="thank-you-title">Thank You!</h1>
+            
+            <p class="thank-you-message">
+                We've received your property information and our team is already reviewing it. 
+                You should expect to hear from us within the next <strong>24 hours</strong> with a competitive cash offer.
+            </p>
+            
+            <div class="next-steps">
+                <h3>What Happens Next?</h3>
+                <ul class="steps-list">
+                    <li>
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Property Review</div>
+                            <div class="step-description">Our team reviews your property details and current market data</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Cash Offer Prepared</div>
+                            <div class="step-description">We prepare a fair, no-obligation cash offer within 24 hours</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Fast Closing</div>
+                            <div class="step-description">If you accept, we can close in as little as 7 days or on your timeline</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contact-section">
+                <h4>Questions? Need to reach us immediately?</h4>
+                <div class="contact-links">
+                    <a href="tel:+1-555-CASH-NOW" class="contact-link">
+                        📞 Call: (555) CASH-NOW
+                    </a>
+                    <a href="#" onclick="contactEmail()" class="contact-link">
+                        ✉️ Email Us
+                    </a>
+                </div>
+            </div>
+            
+            <div class="security-note">
+                We respect your privacy and will never share your information with third parties. 
+                You can read our <a href="privacy.html">Privacy Policy</a> for more details.
+            </div>
+            
+            <a href="index.html" class="home-button">Return to Homepage</a>
+        </div>
+    </div>
+    
+    <!-- JavaScript for email protection -->
+    <script src="script.js?v=2025-07-22-debug"></script>
+    
+    <!-- Analytics Event Tracking -->
+    <script>
+        // Track successful form submission
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'conversion', {
+                'send_to': 'GOOGLE_ADS_CONVERSION_ID', // Replace with actual conversion ID
+                'value': 1.0,
+                'currency': 'USD'
+            });
+        }
+        
+        // Facebook Pixel conversion tracking
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead');
+        }
+        
+        console.log('Form submission successful - Thank you page loaded');
+    </script>
+</body>
+</html> 
