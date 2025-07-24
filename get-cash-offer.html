@@ -25,6 +25,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Resource hints -->
+    <link rel="dns-prefetch" href="//api.airtable.com">
+    
     <!-- Google reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lfl1YwrAAAAAMCP-PNEjjcP5EM7zmOyxtEq8jTp" async defer></script>
     
@@ -38,22 +41,19 @@
       gtag('config', 'AW-17389808442');
     </script>
     
+    <!-- CSS from main styles -->
+    <link rel="stylesheet" href="styles.css">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* Page-specific overrides for focused lead page */
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #1f2937;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
             min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
         }
         
-        .container {
+        .lead-page-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
@@ -94,6 +94,7 @@
         .benefits {
             list-style: none;
             margin-bottom: 2rem;
+            padding: 0;
         }
         
         .benefits li {
@@ -109,104 +110,6 @@
             font-weight: bold;
             margin-right: 1rem;
             font-size: 1.2rem;
-        }
-        
-        .form-section {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-        
-        .form-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1f2937;
-            text-align: center;
-        }
-        
-        .form-subtitle {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #374151;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.2rem 2rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin-top: 1rem;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-        
-        .trust-indicators {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-            font-size: 0.9rem;
-            color: #6b7280;
-        }
-        
-        .trust-indicators span {
-            display: flex;
-            align-items: center;
-        }
-        
-        .trust-indicators span::before {
-            content: "🔒";
-            margin-right: 0.5rem;
         }
         
         .testimonial {
@@ -228,8 +131,32 @@
             opacity: 0.9;
         }
         
+        /* Form section styling to match homepage */
+        .form-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        .form-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+            text-align: center;
+        }
+        
+        .form-header p {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
         @media (max-width: 768px) {
-            .container {
+            .lead-page-container {
                 grid-template-columns: 1fr;
                 gap: 2rem;
                 padding: 1rem;
@@ -242,15 +169,11 @@
             .form-section {
                 padding: 2rem;
             }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="lead-page-container">
         <div class="content-section">
             <div class="logo">Pinnacle Realty Partners</div>
             
@@ -278,131 +201,437 @@
         </div>
         
         <div class="form-section">
-            <h2 class="form-title">Get Your Cash Offer</h2>
-            <p class="form-subtitle">Fill out the form below and we'll contact you within hours</p>
+            <div class="form-header">
+                <h3>Get Your Cash Offer</h3>
+                <p>Quick 2-step form - get your offer in 24 hours</p>
+            </div>
             
-            <form id="cashOfferForm" action="https://submit-form.com/FaMRn6Z5t" method="POST">
-                <div class="form-group">
-                    <label for="fullName">Full Name *</label>
-                    <input type="text" id="fullName" name="name" required>
-                </div>
-                
-                <div class="form-row">
+            <form id="main-form" class="lead-form">
+                <!-- Step 1: Contact Information -->
+                <div class="form-step active" id="step-1">
+                    <!-- Honeypot field (hidden from users, visible to bots) -->
+                    <div class="form-group" style="display: none;">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    
                     <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" 
+                               pattern="[\d\s\-\.\(\)]{10,}" 
+                               placeholder="(555) 123-4567" 
+                               title="Please enter a valid phone number (e.g., 555-123-4567)" 
+                               required>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="address">Property Address *</label>
-                    <input type="text" id="address" name="address" required>
-                </div>
-                
-                <div class="form-row">
                     <div class="form-group">
-                        <label for="bedrooms">Bedrooms</label>
-                        <select id="bedrooms" name="bedrooms">
-                            <option value="">Select</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5+">5+</option>
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" 
+                               pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" 
+                               placeholder="john@example.com" 
+                               title="Please enter a valid email address" 
+                               required>
+                    </div>
+                    <button type="button" class="form-next-btn" id="next-btn">
+                        Next →
+                    </button>
+                </div>
+
+                <!-- Step 2: Property Information -->
+                <div class="form-step" id="step-2">
+                    <div class="form-group">
+                        <label for="address">Property Address</label>
+                        <input type="text" id="address" name="address" placeholder="123 Main St" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Atlanta" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" placeholder="GA" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zipCode">ZIP Code</label>
+                            <input type="text" id="zipCode" name="zipCode" placeholder="30318" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="yearBuilt">Year Built</label>
+                        <input type="number" id="yearBuilt" name="yearBuilt" min="1800" max="2024" placeholder="e.g. 1995" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="condition">Property Condition</label>
+                        <select id="condition" name="condition" required>
+                            <option value="">Select condition</option>
+                            <option value="Excellent">Excellent</option>
+                            <option value="Good">Good</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Poor">Poor</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="bathrooms">Bathrooms</label>
-                        <select id="bathrooms" name="bathrooms">
-                            <option value="">Select</option>
-                            <option value="1">1</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2">2</option>
-                            <option value="2.5">2.5</option>
-                            <option value="3+">3+</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bedrooms">Bedrooms</label>
+                            <select id="bedrooms" name="bedrooms" required>
+                                <option value="">Select bedrooms</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6+">6+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bathrooms">Bathrooms</label>
+                            <select id="bathrooms" name="bathrooms" required>
+                                <option value="">Select bathrooms</option>
+                                <option value="1">1</option>
+                                <option value="1.5">1.5</option>
+                                <option value="2">2</option>
+                                <option value="2.5">2.5</option>
+                                <option value="3">3</option>
+                                <option value="3.5">3.5</option>
+                                <option value="4">4</option>
+                                <option value="4.5">4.5</option>
+                                <option value="5+">5+</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="condition">Property Condition</label>
-                    <select id="condition" name="condition">
-                        <option value="">Select condition</option>
-                        <option value="excellent">Excellent</option>
-                        <option value="good">Good</option>
-                        <option value="fair">Fair</option>
-                        <option value="needs-work">Needs Work</option>
-                        <option value="poor">Poor</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="timeline">When do you need to sell?</label>
-                    <select id="timeline" name="timeline">
-                        <option value="">Select timeline</option>
-                        <option value="asap">ASAP</option>
-                        <option value="1-month">Within 1 month</option>
-                        <option value="3-months">Within 3 months</option>
-                        <option value="6-months">Within 6 months</option>
-                        <option value="just-exploring">Just exploring</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="comments">Additional Details (Optional)</label>
-                    <textarea id="comments" name="comments" rows="3" placeholder="Tell us more about your property or situation..."></textarea>
-                </div>
-                
-                <input type="hidden" name="_redirect" value="https://pinnaclerealtypartners.com/thank-you.html">
-                <input type="hidden" name="_form_name" value="Cash Offer Form">
-                
-                <button type="submit" class="submit-btn">Get My Cash Offer Now</button>
-                
-                <div class="trust-indicators">
-                    <span>100% Secure</span>
-                    <span>No Spam Guarantee</span>
-                    <span>Quick Response</span>
+                    <div class="form-group">
+                        <label for="notes">Additional Information</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="Tell us about any additional features like pool, deck, additions, or major issues that might affect the value..."></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="form-back-btn" id="back-btn">
+                            ← Back
+                        </button>
+                        <button type="submit" class="form-submit-btn">
+                            Get My Cash Offer
+                            <div class="btn-loading">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </form>
+            
+            <div class="form-footer">
+                <div class="trust-badges">
+                    <span class="trust-badge">
+                        <i class="fa fa-shield"></i>
+                        100% Secure
+                    </span>
+                    <span class="trust-badge">
+                        <i class="fa fa-clock"></i>
+                        24hr Response
+                    </span>
+                    <span class="trust-badge">
+                        <i class="fa fa-check"></i>
+                        No Obligation
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Form submission handling
-        document.getElementById('cashOfferForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            
-            // reCAPTCHA validation
-            grecaptcha.ready(() => {
-                grecaptcha.execute('6Lfl1YwrAAAAAMCP-PNEjjcP5EM7zmOyxtEq8jTp', {action: 'submit'})
-                .then((token) => {
-                    formData.append('g-recaptcha-response', token);
-                    
-                    // Submit form
-                    fetch(this.action, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            window.location.href = 'thank-you.html';
-                        } else {
-                            alert('There was an error submitting your form. Please try again.');
+        // Exact same JavaScript configuration as homepage
+        class PinnacleWebsite {
+            constructor() {
+                this.form = document.getElementById('main-form');
+                this.submitBtn = document.querySelector('.form-submit-btn');
+                this.nextBtn = document.getElementById('next-btn');
+                this.backBtn = document.getElementById('back-btn');
+                this.loadingSpinner = document.querySelector('.btn-loading');
+                this.currentStep = 1;
+                
+                // Spam Protection
+                this.formLoadTime = Date.now();
+                this.minSubmissionTime = 3000; // 3 seconds minimum
+                this.lastSubmissionTime = parseInt(localStorage.getItem('lastSubmissionTime') || '0');
+                this.submissionCooldown = 300000; // 5 minutes between submissions
+                
+                // Configuration for Airtable - EXACT SAME AS HOMEPAGE
+                this.airtableConfig = {
+                    baseId: 'appGD58Yy4rFpOBTH', // Your Real Estate CRM Base ID
+                    tableName: 'Sellers', // Try simplified name first
+                    apiKey: 'YOUR_AIRTABLE_API_KEY_HERE' // Your API key
+                };
+                
+                // reCAPTCHA Configuration
+                window.recaptchaSiteKey = '6Lfl1YwrAAAAAMCP-PNEjjcP5EM7zmOyxtEq8jTp';
+                
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.setupFormValidation();
+            }
+
+            setupEventListeners() {
+                // Form submission
+                if (this.form) {
+                    this.form.addEventListener('submit', this.handleFormSubmit.bind(this));
+                }
+
+                // Step navigation
+                if (this.nextBtn) {
+                    this.nextBtn.addEventListener('click', this.nextStep.bind(this));
+                }
+
+                if (this.backBtn) {
+                    this.backBtn.addEventListener('click', this.prevStep.bind(this));
+                }
+            }
+
+            setupFormValidation() {
+                // Real-time validation for better UX
+                const inputs = this.form.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    input.addEventListener('blur', this.validateField.bind(this));
+                    input.addEventListener('input', this.clearFieldError.bind(this));
+                });
+            }
+
+            validateField(e) {
+                const field = e.target;
+                const value = field.value.trim();
+                
+                // Remove any existing error styling
+                field.classList.remove('error');
+                
+                // Check if required field is empty
+                if (field.hasAttribute('required') && !value) {
+                    this.showFieldError(field, 'This field is required');
+                    return false;
+                }
+                
+                // Specific validations
+                switch (field.type) {
+                    case 'email':
+                        if (value && !this.isValidEmail(value)) {
+                            this.showFieldError(field, 'Please enter a valid email address');
+                            return false;
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('There was an error submitting your form. Please try again.');
+                        break;
+                    case 'tel':
+                        if (value && !this.isValidPhone(value)) {
+                            this.showFieldError(field, 'Please enter a valid phone number');
+                            return false;
+                        }
+                        break;
+                }
+                
+                return true;
+            }
+
+            showFieldError(field, message) {
+                field.classList.add('error');
+                // You could add error message display here
+            }
+
+            clearFieldError(e) {
+                e.target.classList.remove('error');
+            }
+
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            isValidPhone(phone) {
+                const phoneRegex = /^[\d\s\-\.\(\)]{10,}$/;
+                return phoneRegex.test(phone);
+            }
+
+            nextStep() {
+                if (this.validateCurrentStep()) {
+                    this.currentStep = 2;
+                    this.updateStepDisplay();
+                }
+            }
+
+            prevStep() {
+                this.currentStep = 1;
+                this.updateStepDisplay();
+            }
+
+            validateCurrentStep() {
+                const currentStepElement = document.getElementById(`step-${this.currentStep}`);
+                const requiredFields = currentStepElement.querySelectorAll('input[required], select[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!this.validateField({ target: field })) {
+                        isValid = false;
+                    }
+                });
+
+                return isValid;
+            }
+
+            updateStepDisplay() {
+                const step1 = document.getElementById('step-1');
+                const step2 = document.getElementById('step-2');
+
+                if (this.currentStep === 1) {
+                    step1.classList.add('active');
+                    step2.classList.remove('active');
+                } else {
+                    step1.classList.remove('active');
+                    step2.classList.add('active');
+                }
+            }
+
+            async handleFormSubmit(e) {
+                e.preventDefault();
+                
+                // Check honeypot
+                const honeypotField = document.getElementById('website');
+                if (honeypotField && honeypotField.value) {
+                    console.log('Bot detected via honeypot');
+                    return false;
+                }
+                
+                // Validate submission timing
+                const currentTime = Date.now();
+                if (currentTime - this.formLoadTime < this.minSubmissionTime) {
+                    alert('Please take a moment to fill out the form completely.');
+                    return false;
+                }
+                
+                // Check submission cooldown
+                if (currentTime - this.lastSubmissionTime < this.submissionCooldown) {
+                    alert('Please wait before submitting another form.');
+                    return false;
+                }
+                
+                // Validate all fields
+                if (!this.validateCurrentStep()) {
+                    return false;
+                }
+                
+                this.showLoading(true);
+                
+                try {
+                    const formData = this.collectFormData();
+                    
+                    // Execute reCAPTCHA
+                    const token = await this.executeRecaptcha();
+                    formData.recaptchaToken = token;
+                    
+                    // Submit to Airtable
+                    await this.submitToAirtable(formData);
+                    
+                    // Store submission time
+                    localStorage.setItem('lastSubmissionTime', currentTime.toString());
+                    
+                    // Redirect to thank you page
+                    window.location.href = 'thank-you.html';
+                    
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    alert('There was an error submitting your form. Please try again.');
+                    this.showLoading(false);
+                }
+            }
+
+            collectFormData() {
+                const formData = new FormData(this.form);
+                const data = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+                
+                // Add metadata
+                data.submissionDate = new Date().toISOString();
+                data.source = 'Get Cash Offer Page';
+                data.userAgent = navigator.userAgent;
+                data.referrer = document.referrer;
+                
+                return data;
+            }
+
+            async executeRecaptcha() {
+                return new Promise((resolve, reject) => {
+                    if (typeof grecaptcha === 'undefined') {
+                        reject(new Error('reCAPTCHA not loaded'));
+                        return;
+                    }
+                    
+                    grecaptcha.ready(() => {
+                        grecaptcha.execute(window.recaptchaSiteKey, { action: 'submit' })
+                            .then(resolve)
+                            .catch(reject);
                     });
                 });
-            });
+            }
+
+            async submitToAirtable(data) {
+                const url = `https://api.airtable.com/v0/${this.airtableConfig.baseId}/${encodeURIComponent(this.airtableConfig.tableName)}`;
+                
+                const airtableRecord = {
+                    fields: {
+                        'Full Name': data.fullName || '',
+                        'Phone': data.phone || '',
+                        'Email': data.email || '',
+                        'Address': data.address || '',
+                        'City': data.city || '',
+                        'State': data.state || '',
+                        'ZIP Code': data.zipCode || '',
+                        'Year Built': data.yearBuilt ? parseInt(data.yearBuilt) : null,
+                        'Condition': data.condition || '',
+                        'Bedrooms': data.bedrooms || '',
+                        'Bathrooms': data.bathrooms || '',
+                        'Notes': data.notes || '',
+                        'Source': data.source || '',
+                        'Submission Date': data.submissionDate || '',
+                        'reCAPTCHA Token': data.recaptchaToken || ''
+                    }
+                };
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${this.airtableConfig.apiKey}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(airtableRecord)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Airtable API error response:', errorText);
+                    throw new Error(`Airtable submission failed: ${response.status} ${response.statusText}`);
+                }
+
+                return await response.json();
+            }
+
+            showLoading(show) {
+                if (this.submitBtn && this.loadingSpinner) {
+                    if (show) {
+                        this.submitBtn.disabled = true;
+                        this.loadingSpinner.style.display = 'block';
+                    } else {
+                        this.submitBtn.disabled = false;
+                        this.loadingSpinner.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new PinnacleWebsite();
         });
     </script>
 </body>
