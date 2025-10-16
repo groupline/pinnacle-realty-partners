@@ -358,11 +358,9 @@
                 this.lastSubmissionTime = parseInt(localStorage.getItem('lastSubmissionTime') || '0');
                 this.submissionCooldown = 300000; // 5 minutes between submissions
                 
-                // Configuration for Airtable - EXACT SAME AS HOMEPAGE
-                this.airtableConfig = {
-                    baseId: 'appGD58Yy4rFpOBTH', // Your Real Estate CRM Base ID
-                    tableName: 'Sellers', // Try simplified name first
-                    apiKey: 'YOUR_AIRTABLE_API_KEY_HERE' // Your API key
+                // Configuration for CRM API
+                this.crmConfig = {
+                    apiUrl: 'https://crm.pinnaclepropdeals.com/api/leads' // Wholesale CRM API endpoint
                 };
                 
                 // reCAPTCHA Configuration
@@ -527,9 +525,9 @@
                     // Execute reCAPTCHA
                     const token = await this.executeRecaptcha();
                     formData.recaptchaToken = token;
-                    
-                    // Submit to Airtable
-                    await this.submitToAirtable(formData);
+
+                    // Submit to CRM
+                    await this.submitToCRM(formData);
                     
                     // Store submission time
                     localStorage.setItem('lastSubmissionTime', currentTime.toString());
@@ -576,42 +574,19 @@
                 });
             }
 
-            async submitToAirtable(data) {
-                const url = `https://api.airtable.com/v0/${this.airtableConfig.baseId}/${encodeURIComponent(this.airtableConfig.tableName)}`;
-                
-                const airtableRecord = {
-                    fields: {
-                        'Full Name': data.fullName || '',
-                        'Phone': data.phone || '',
-                        'Email': data.email || '',
-                        'Address': data.address || '',
-                        'City': data.city || '',
-                        'State': data.state || '',
-                        'ZIP Code': data.zipCode || '',
-                        'Year Built': data.yearBuilt ? parseInt(data.yearBuilt) : null,
-                        'Condition': data.condition || '',
-                        'Bedrooms': data.bedrooms || '',
-                        'Bathrooms': data.bathrooms || '',
-                        'Notes': data.notes || '',
-                        'Source': data.source || '',
-                        'Submission Date': data.submissionDate || '',
-                        'reCAPTCHA Token': data.recaptchaToken || ''
-                    }
-                };
-
-                const response = await fetch(url, {
+            async submitToCRM(data) {
+                const response = await fetch(this.crmConfig.apiUrl, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${this.airtableConfig.apiKey}`,
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(airtableRecord)
+                    body: JSON.stringify(data)
                 });
 
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Airtable API error response:', errorText);
-                    throw new Error(`Airtable submission failed: ${response.status} ${response.statusText}`);
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('CRM API error response:', errorData);
+                    throw new Error(`CRM submission failed: ${response.status} ${response.statusText}`);
                 }
 
                 return await response.json();

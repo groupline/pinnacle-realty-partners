@@ -754,6 +754,142 @@ section {
     margin-top: -30px;
 }
 
+/* Investors Section */
+.investors-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--blue-dark) 100%);
+    color: var(--white);
+}
+
+.investors-section .section-header h2,
+.investors-section .section-header p {
+    color: var(--white);
+}
+
+.investors-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4xl);
+}
+
+.investors-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-lg);
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: var(--space-2xl);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition-normal);
+}
+
+.benefit-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-lg);
+    display: block;
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: var(--space-md);
+}
+
+.benefit-card p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.investors-cta-box {
+    background: var(--white);
+    padding: var(--space-3xl);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-2xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.investors-cta-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-orange) 0%, var(--orange-light) 100%);
+}
+
+.investors-cta-box h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: var(--space-md);
+}
+
+.investors-cta-box > p {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    margin-bottom: var(--space-2xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.investors-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-2xl) 0;
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.investor-stat {
+    text-align: center;
+}
+
+.investor-stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-orange);
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-display);
+}
+
+.investor-stat-label {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    font-weight: 600;
+}
+
+.investors-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.investors-disclaimer {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    font-style: italic;
+    margin: 0;
+}
+
 /* Testimonials */
 .testimonials {
     background: var(--gray-50);
@@ -1105,6 +1241,15 @@ section {
         grid-template-columns: 1fr;
         gap: var(--space-2xl);
         text-align: center;
+    }
+
+    .investors-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .investors-benefits {
+        grid-template-columns: 1fr;
     }
 }
 

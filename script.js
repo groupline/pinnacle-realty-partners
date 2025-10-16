@@ -19,11 +19,9 @@ class PinnacleWebsite {
         this.lastSubmissionTime = parseInt(localStorage.getItem('lastSubmissionTime') || '0');
         this.submissionCooldown = 300000; // 5 minutes between submissions
         
-        // Configuration for Airtable
-        this.airtableConfig = {
-            baseId: 'appGD58Yy4rFpOBTH', // Your Real Estate CRM Base ID
-            tableName: 'Sellers', // Try simplified name first
-            apiKey: 'YOUR_AIRTABLE_API_KEY_HERE' // Your API key
+        // Configuration for CRM API
+        this.crmConfig = {
+            apiUrl: 'https://crm.pinnaclepropdeals.com/api/leads' // Wholesale CRM API endpoint
         };
         
         // reCAPTCHA Configuration for pinnaclepropdeals.com
@@ -121,7 +119,7 @@ class PinnacleWebsite {
             // Record successful submission time
             localStorage.setItem('lastSubmissionTime', Date.now().toString());
             
-            await this.submitToAirtable(formData);
+            await this.submitToCRM(formData);
             // Redirect to thank you page instead of showing modal
             window.location.href = 'thank-you.html';
         } catch (error) {
@@ -159,61 +157,55 @@ class PinnacleWebsite {
 
 
 
-    // Get form data mapped to Airtable field IDs
+    // Get form data for CRM API
     getFormData() {
         const formData = new FormData(this.form);
         return {
-            'fldtEUxH8s2VqpUAf': formData.get('fullName'),  // Seller Name
-            'fldwq6E6dlRVIxcBl': formData.get('phone'),     // Phone Number  
-            'fldZPvhhjUi0qR6JJ': formData.get('email'),     // Email
-            'fldQFyAYKsO60VRql': formData.get('address'),   // Property Address
-            'fld3VABv1uoM1735y': formData.get('city'),       // Property City
-            'flduqfSf5cnwBt9MD': formData.get('state'),     // Property State
-            'fld9OFoTcfzX1GVk3': formData.get('zipCode'),   // Property Zip
-            'fldwdN1unMgU07LIF': parseInt(formData.get('yearBuilt')) || null, // Year Built (number)
-            'fldbWxjq58xMXk5La': formData.get('condition'),  // Condition
-            'fldaUV9Dx81KEI7RN': formData.get('bedrooms'),   // Bedrooms
-            'fldc9TNdjnOrOK5f8': formData.get('bathrooms'),  // Bathrooms
-            'fldHAzYkOzSoR8zES': formData.get('notes') || '' // Notes
+            fullName: formData.get('fullName'),
+            phone: formData.get('phone'),
+            email: formData.get('email'),
+            address: formData.get('address'),
+            city: formData.get('city'),
+            state: formData.get('state'),
+            zipCode: formData.get('zipCode'),
+            yearBuilt: formData.get('yearBuilt'),
+            condition: formData.get('condition'),
+            bedrooms: formData.get('bedrooms'),
+            bathrooms: formData.get('bathrooms'),
+            notes: formData.get('notes') || '',
+            source: 'Website - Homepage Form',
+            submissionDate: new Date().toISOString(),
+            userAgent: navigator.userAgent,
+            referrer: document.referrer
         };
     }
 
-    // Submit to Airtable
-    async submitToAirtable(data) {
-        const url = `https://api.airtable.com/v0/${this.airtableConfig.baseId}/${encodeURIComponent(this.airtableConfig.tableName)}`;
-        
-        const payload = {
-            fields: data  // data already contains the field IDs as keys
-        };
-        
-        console.log('=== AIRTABLE SUBMISSION DEBUG ===');
-        console.log('URL:', url);
-        console.log('Base ID:', this.airtableConfig.baseId);
-        console.log('Table Name:', this.airtableConfig.tableName);
-        console.log('API Key (first 10 chars):', this.airtableConfig.apiKey.substring(0, 10) + '...');
-        console.log('Payload:', payload);
-        
+    // Submit to CRM API
+    async submitToCRM(data) {
+        console.log('=== CRM SUBMISSION DEBUG ===');
+        console.log('URL:', this.crmConfig.apiUrl);
+        console.log('Data:', data);
+
         try {
-            const response = await fetch(url, {
+            const response = await fetch(this.crmConfig.apiUrl, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${this.airtableConfig.apiKey}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(data)
             });
-            
+
             console.log('Response status:', response.status);
             console.log('Response statusText:', response.statusText);
-            
+
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Airtable API error response:', errorText);
-                throw new Error(`Airtable submission failed: ${response.status} - ${errorText}`);
+                const errorData = await response.json().catch(() => ({}));
+                console.error('CRM API error response:', errorData);
+                throw new Error(`CRM submission failed: ${response.status} - ${JSON.stringify(errorData)}`);
             }
-            
+
             const result = await response.json();
-            console.log('Airtable success:', result);
+            console.log('CRM submission success:', result);
             return result;
         } catch (error) {
             console.error('=== SUBMISSION ERROR ===');
