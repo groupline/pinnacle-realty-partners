@@ -3,7 +3,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const API_KEY = '6df6694b-7a31-4bdc-826c-ccb358932cbc';
+    const API_KEY = '60520d12-3f34-4603-a2e3-f5c8f7c577c8';
     const ENDPOINT = 'https://leads.leadexec.net/v2/insert/general';
 
     // Capture client IP address
