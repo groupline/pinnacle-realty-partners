@@ -29,7 +29,7 @@
     <link rel="dns-prefetch" href="//api.airtable.com">
     
     <!-- Google reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lfl1YwrAAAAAMCP-PNEjjcP5EM7zmOyxtEq8jTp" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LddeV8sAAAAAM2yebF-X7t4hQAooxbinP8Pu8Ls" async defer></script>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17389808442"></script>
@@ -308,6 +308,14 @@
                         <label for="notes">Additional Information</label>
                         <textarea id="notes" name="notes" rows="3" placeholder="Tell us about any additional features like pool, deck, additions, or major issues that might affect the value..."></textarea>
                     </div>
+                    <div class="tcpa-consent" style="margin-bottom: 1rem;">
+                        <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="tcpaConsent" name="tcpaConsent" required style="margin-top: 3px; flex-shrink: 0;">
+                            <span style="font-size: 0.65rem; color: #717171; line-height: 1.4;">
+                                By checking this box, I consent to receive calls and text messages from Pinnacle Property Solutions at the phone number provided, including calls using an autodialer or prerecorded messages. Consent is not a condition of purchase. Msg & data rates may apply. Reply STOP to opt out.
+                            </span>
+                        </label>
+                    </div>
                     <div class="form-buttons">
                         <button type="button" class="form-back-btn" id="back-btn">
                             ← Back
@@ -364,7 +372,7 @@
                 };
                 
                 // reCAPTCHA Configuration
-                window.recaptchaSiteKey = '6Lfl1YwrAAAAAMCP-PNEjjcP5EM7zmOyxtEq8jTp';
+                window.recaptchaSiteKey = '6LddeV8sAAAAAM2yebF-X7t4hQAooxbinP8Pu8Ls';
                 
                 this.init();
             }
@@ -545,17 +553,21 @@
             collectFormData() {
                 const formData = new FormData(this.form);
                 const data = {};
-                
+
                 for (let [key, value] of formData.entries()) {
                     data[key] = value;
                 }
-                
+
                 // Add metadata
                 data.submissionDate = new Date().toISOString();
                 data.source = 'Get Cash Offer Page';
                 data.userAgent = navigator.userAgent;
                 data.referrer = document.referrer;
-                
+
+                // Add TCPA consent data
+                const tcpaCheckbox = document.getElementById('tcpaConsent');
+                data.Consent = tcpaCheckbox && tcpaCheckbox.checked ? "Yes" : "No";
+
                 return data;
             }
 
