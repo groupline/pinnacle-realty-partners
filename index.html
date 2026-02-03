@@ -914,6 +914,8 @@
 
         .hidden { display: none !important; }
     </style>
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lfl1YwrAAAAAMCP-PNEjjcP5EM7zmOyxtEq8jTp" async defer></script>
 </head>
 <body>
     <header class="header">
@@ -1012,6 +1014,12 @@
                 </div>
 
                 <form id="lead-form" class="form-body">
+                    <!-- Honeypot field (hidden from users, visible to bots) -->
+                    <div style="position: absolute; left: -9999px;">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
                     <!-- Step 1: Address -->
                     <div class="survey-step active" data-step="1">
                         <div class="step-question">Where is your property located?</div>
@@ -1321,6 +1329,11 @@
         const totalSteps = 6;
         const formData = {};
 
+        // Spam Protection
+        const formLoadTime = Date.now();
+        const minSubmissionTime = 3000; // 3 seconds minimum
+        const RECAPTCHA_SITE_KEY = '6Lfl1YwrAAAAAMCP-PNEjjcP5EM7zmOyxtEq8jTp';
+
         const API_CONFIG = {
             endpoint: 'https://leads.leadexec.net/processor/insert/general',
             clientId: '6df6694b-7a31-4bdc-826c-ccb358932cbc',
@@ -1411,10 +1424,33 @@
             e.preventDefault();
             if (!validateCurrentStep()) return;
 
+            // Spam Protection: Check honeypot
+            const honeypot = document.getElementById('website');
+            if (honeypot && honeypot.value) {
+                console.log('Bot detected via honeypot');
+                return false;
+            }
+
+            // Spam Protection: Check minimum time
+            if (Date.now() - formLoadTime < minSubmissionTime) {
+                alert('Please take a moment to review your information.');
+                return false;
+            }
+
             const btn = document.getElementById('submit-btn');
             btn.querySelector('.btn-text').classList.add('hidden');
             btn.querySelector('.btn-loading').classList.remove('hidden');
             btn.disabled = true;
+
+            // Get reCAPTCHA token
+            let recaptchaToken = '';
+            try {
+                if (typeof grecaptcha !== 'undefined') {
+                    recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
+                }
+            } catch (err) {
+                console.warn('reCAPTCHA failed:', err);
+            }
 
             const form = e.target;
             const data = {
@@ -1437,7 +1473,8 @@
                         Condition: formData.Condition,
                         ReasonForSelling: form.ReasonForSelling.value || "Not specified",
                         OriginalCanadaCountry: "",
-                        Consent: form.tcpaConsent.checked ? "Yes" : "No"
+                        Consent: form.tcpaConsent.checked ? "Yes" : "No",
+                        recaptchaToken: recaptchaToken
                     }
                 }]
             };
