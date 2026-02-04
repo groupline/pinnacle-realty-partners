@@ -913,11 +913,164 @@
         }
 
         .hidden { display: none !important; }
+
+        /* Announcement Bar */
+        .announcement-bar {
+            background: linear-gradient(135deg, #f5a623 0%, #e89a1d 100%);
+            color: #1a1a1a;
+            padding: 0.625rem 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 101;
+        }
+
+        .announcement-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            animation: subtle-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+
+        .announcement-icon {
+            font-size: 1.1rem;
+            color: #1a1a1a;
+        }
+
+        .announcement-bar strong {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(0,0,0,0.15);
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Header Button */
+        .header-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Adjust header position for announcement bar */
+        .header {
+            top: 38px;
+        }
+
+        /* Adjust main padding for announcement bar */
+        .main {
+            padding-top: 111px;
+        }
+
+        @media (max-width: 600px) {
+            .announcement-bar {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.75rem;
+            }
+            .announcement-icon {
+                font-size: 0.9rem;
+            }
+            .header-btn {
+                padding: 0.4rem 0.875rem;
+                font-size: 0.8rem;
+            }
+            .main {
+                padding-top: 105px;
+            }
+        }
+
+        /* Mini Testimonials */
+        .mini-testimonials {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mini-testimonial {
+            flex: 1;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 8px rgba(26, 95, 74, 0.1);
+        }
+
+        .mini-stars {
+            color: #f5a623;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .mini-testimonial p {
+            color: var(--text-dark);
+            margin: 0 0 0.5rem 0;
+            font-style: italic;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .mini-author {
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .mini-testimonials {
+                justify-content: center;
+            }
+            .mini-testimonial:nth-child(2) {
+                display: none;
+            }
+            .mini-testimonial {
+                max-width: 320px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .mini-testimonials {
+                margin-bottom: 1rem;
+            }
+            .mini-testimonial {
+                padding: 0.875rem;
+                font-size: 0.8rem;
+            }
+        }
     </style>
     <!-- Google reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LddeV8sAAAAAM2yebF-X7t4hQAooxbinP8Pu8Ls" async defer></script>
 </head>
 <body>
+    <div class="announcement-bar">
+        <div class="announcement-content">
+            <span class="announcement-icon">★</span>
+            <span>Top dollar offers — <strong>guaranteed!</strong></span>
+            <span class="announcement-icon">★</span>
+        </div>
+    </div>
     <header class="header">
         <div class="header-content">
             <a href="/" class="logo">
@@ -927,10 +1080,9 @@
                 <span class="logo-text">Pinnacle</span>
             </a>
             <div class="header-cta">
-                <span class="header-badge">
-                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="currentColor"/></svg>
-                    <span>24hr Cash Offers</span>
-                </span>
+                <a href="#lead-form" class="header-btn">
+                    Get My Offer
+                </a>
             </div>
         </div>
     </header>
@@ -961,8 +1113,21 @@
                         <div class="stat-label">Fees or Costs</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value">7 Day</div>
-                        <div class="stat-label">Avg. Closing</div>
+                        <div class="stat-value">7 Days</div>
+                        <div class="stat-label">To Close</div>
+                    </div>
+                </div>
+
+                <div class="mini-testimonials">
+                    <div class="mini-testimonial">
+                        <div class="mini-stars">★★★★★</div>
+                        <p>"Closed in just 5 days. Saved me from foreclosure!"</p>
+                        <span class="mini-author">— James W., Atlanta</span>
+                    </div>
+                    <div class="mini-testimonial">
+                        <div class="mini-stars">★★★★★</div>
+                        <p>"Fair offer, no repairs needed. So easy!"</p>
+                        <span class="mini-author">— Carlos M., Marietta</span>
                     </div>
                 </div>
 
@@ -1251,7 +1416,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="testimonial-text">"I was facing foreclosure and needed to sell fast. Pinnacle gave me a fair cash offer within 24 hours and we closed in just 10 days. They saved my credit and gave me peace of mind."</p>
+                    <p class="testimonial-text">"I was facing foreclosure and needed to sell fast. Pinnacle gave me a fair cash offer within 24 hours and we closed in just 5 days. They saved my credit and gave me peace of mind."</p>
                     <div class="testimonial-author">
                         <img src="/testimonials/james-wilson.jpg" alt="James W." class="testimonial-avatar">
                         <div class="testimonial-info">
