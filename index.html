@@ -814,25 +814,124 @@
 
         /* Footer */
         .site-footer {
-            background: var(--bg-warm);
-            padding: 2rem 1.5rem;
-            text-align: center;
-            margin-top: 4rem;
-            border-top: 1px solid var(--border);
+            background: var(--primary-dark);
+            color: white;
+            padding: 3rem 1.5rem 1.5rem;
+            margin-top: 0;
         }
 
-        .site-footer p {
-            font-size: 0.85rem;
-            color: var(--text-light);
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
         }
 
-        .site-footer a {
-            color: var(--text-medium);
+        .footer-brand {
+            max-width: 350px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-logo .logo-mark {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo .logo-mark svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--primary-dark);
+        }
+
+        .footer-logo span {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-contact p {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+            opacity: 0.85;
+        }
+
+        .footer-company {
+            font-weight: 600;
+            opacity: 1 !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .footer-contact a {
+            color: var(--accent);
             text-decoration: none;
         }
 
-        .site-footer a:hover {
-            color: var(--primary);
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-bottom a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .footer-brand {
+                max-width: 100%;
+            }
+            .footer-logo {
+                justify-content: center;
+            }
+            .footer-contact {
+                text-align: center;
+            }
         }
 
         /* Responsive */
@@ -1485,8 +1584,27 @@
     </section>
 
     <footer class="site-footer">
-        <p>&copy; 2024 Pinnacle Property Solutions. All rights reserved.</p>
-        <p><a href="/privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms.html">Terms of Service</a></p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-mark">
+                        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/></svg>
+                    </div>
+                    <span>Pinnacle</span>
+                </div>
+                <p class="footer-tagline">Atlanta's trusted cash home buyers. Fast closings, fair offers, zero hassle.</p>
+            </div>
+            <div class="footer-contact">
+                <p class="footer-company">Pinnacle Realty Partners LLC</p>
+                <p>1700 Northside Drive NW Ste A7 #1310</p>
+                <p>Atlanta, GA 30318</p>
+                <p><a href="mailto:info@pinnaclepropdeals.com">info@pinnaclepropdeals.com</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Pinnacle Property Solutions. All rights reserved.</p>
+            <p><a href="/privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms.html">Terms of Service</a></p>
+        </div>
     </footer>
 
     <script>
